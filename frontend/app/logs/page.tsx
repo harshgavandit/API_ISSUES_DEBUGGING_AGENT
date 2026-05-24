@@ -1,4 +1,5 @@
 import { getLogs, type ApiLog } from "@/lib/api";
+import { FileSearch, Timer, TriangleAlert } from "lucide-react";
 
 export default async function LogsPage() {
   let logs: ApiLog[] = [];
@@ -18,6 +19,14 @@ export default async function LogsPage() {
         </div>
       </div>
       <div className="card">
+        <div className="table-toolbar">
+          <span>
+            <FileSearch size={16} /> {logs.length} events loaded
+          </span>
+          <span>
+            <TriangleAlert size={16} /> Silent failures appear as green HTTP status with failed response bodies
+          </span>
+        </div>
         <table className="table">
           <thead>
             <tr>
@@ -43,11 +52,22 @@ export default async function LogsPage() {
                 </td>
                 <td>{Math.round(log.latency_ms)}ms</td>
                 <td className="code">{log.trace_id || "-"}</td>
-                <td>{log.error_message || log.response_body_sample || "-"}</td>
+                <td>
+                  <span className={log.error_message || log.response_body_sample?.includes("false") ? "log-error" : ""}>
+                    {log.error_message || log.response_body_sample || "-"}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {!logs.length ? (
+          <div className="empty-state table-empty">
+            <Timer size={24} />
+            <h2>No logs ingested yet</h2>
+            <p>Run the simulator to stream realistic checkout and payment API events.</p>
+          </div>
+        ) : null}
       </div>
     </>
   );

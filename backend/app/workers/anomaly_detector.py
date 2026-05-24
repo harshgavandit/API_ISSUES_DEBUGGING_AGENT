@@ -112,6 +112,13 @@ def create_incidents(db: Session) -> list[Incident]:
             )
         )
         if existing:
+            explanation = explain_failure_group(db, group)
+            existing.title = explanation.get("title") or existing.title
+            existing.summary = explanation.get("summary") or existing.summary
+            existing.likely_cause = explanation.get("likely_cause") or existing.likely_cause
+            existing.recommendations = explanation.get("recommendations") or existing.recommendations
+            existing.ai_confidence = float(explanation.get("ai_confidence") or existing.ai_confidence)
+            db.commit()
             continue
 
         explanation = explain_failure_group(db, group)

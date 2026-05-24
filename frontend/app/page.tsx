@@ -2,6 +2,7 @@ import { AnalyzeButton } from "@/components/AnalyzeButton";
 import { IncidentCard } from "@/components/IncidentCard";
 import { MetricCard } from "@/components/MetricCard";
 import { getIncidents, getSummary, type Incident, type Summary } from "@/lib/api";
+import { Activity, AlertTriangle, CheckCircle2, Clock3, Radar, ShieldCheck, Zap } from "lucide-react";
 
 export default async function DashboardPage() {
   let summary: Summary;
@@ -20,52 +21,108 @@ export default async function DashboardPage() {
   }
 
   const latest = incidents.slice(0, 3);
+  const errorPercent = summary.error_rate * 100;
+  const riskScore = Math.min(
+    100,
+    Math.round(summary.active_incidents * 28 + errorPercent * 3 + summary.silent_failures * 5 + summary.p95_latency_ms / 80)
+  );
+  const healthySignals = [
+    { label: "Silent failure detection", active: summary.silent_failures > 0 },
+    { label: "Latency anomaly scan", active: summary.p95_latency_ms > 1000 },
+    { label: "Incident grouping", active: summary.active_incidents > 0 },
+  ];
+  const maxEndpointRequests = Math.max(...summary.risky_endpoints.map((row) => row.requests), 1);
 
   return (
     <>
-      <div className="page-header">
-        <div>
-          <p className="eyebrow">Overview</p>
-          <h1>API reliability command center</h1>
-          <p className="muted">Monitor silent failures, latency drift, and recurring integration issues.</p>
+      <section className="hero-panel">
+        <div className="hero-copy">
+          <p className="eyebrow">AI-ready API incident response</p>
+          <h1>Catch silent failures before users report them.</h1>
+          <p>
+            API Copilot ingests logs, detects business-level failures, groups recurring errors, and drafts
+            developer-ready debugging reports.
+          </p>
+          <div className="hero-actions">
+            <AnalyzeButton />
+            <span className="status-chip">
+              <ShieldCheck size={15} /> Free deterministic mode active
+            </span>
+          </div>
         </div>
-        <AnalyzeButton />
-      </div>
-
-      <section className="grid metrics">
-        <MetricCard label="Requests, last hour" value={summary.total_requests} hint="Ingested API events" />
-        <MetricCard label="Error rate" value={`${(summary.error_rate * 100).toFixed(1)}%`} hint="HTTP 5xx failures" />
-        <MetricCard label="P95 latency" value={`${summary.p95_latency_ms}ms`} hint="Slowest meaningful tail" />
-        <MetricCard label="Active incidents" value={summary.active_incidents} hint="Open debugging threads" />
+        <div className="risk-console">
+          <div className="risk-header">
+            <span>
+              <Radar size={16} /> Live risk score
+            </span>
+            <strong>{riskScore}</strong>
+          </div>
+          <div className="risk-meter">
+            <span style={{ width: `${riskScore}%` }} />
+          </div>
+          <div className="signal-list">
+            {healthySignals.map((signal) => (
+              <div key={signal.label} className={signal.active ? "signal active" : "signal"}>
+                {signal.active ? <AlertTriangle size={15} /> : <CheckCircle2 size={15} />}
+                {signal.label}
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="grid two-col" style={{ marginTop: 16 }}>
+      <section className="grid metrics">
+        <MetricCard label="Requests, last hour" value={summary.total_requests} hint="Ingested API events" tone="info" />
+        <MetricCard label="Error rate" value={`${errorPercent.toFixed(1)}%`} hint="HTTP 5xx failures" tone={errorPercent > 8 ? "danger" : "good"} />
+        <MetricCard label="Silent failures" value={summary.silent_failures} hint="HTTP 200 but business failed" tone={summary.silent_failures ? "warn" : "good"} />
+        <MetricCard label="Active incidents" value={summary.active_incidents} hint="Open debugging threads" tone={summary.active_incidents ? "danger" : "good"} />
+      </section>
+
+      <section className="grid two-col section-gap">
         <div className="card">
-          <h2>Risky endpoints</h2>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Endpoint</th>
-                <th>Requests</th>
-                <th>Avg latency</th>
-              </tr>
-            </thead>
-            <tbody>
-              {summary.risky_endpoints.map((row) => (
-                <tr key={row.endpoint}>
-                  <td className="code">{row.endpoint}</td>
-                  <td>{row.requests}</td>
-                  <td>{row.avg_latency_ms}ms</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="section-title">
+            <div>
+              <p className="eyebrow">Blast radius</p>
+              <h2>Riskiest endpoints</h2>
+            </div>
+            <span className="mini-chip">
+              <Clock3 size={14} /> Last hour
+            </span>
+          </div>
+          <div className="endpoint-list">
+            {summary.risky_endpoints.length ? summary.risky_endpoints.map((row) => (
+              <div className="endpoint-row" key={row.endpoint}>
+                <div>
+                  <span className="code">{row.endpoint}</span>
+                  <small>{row.requests} requests · {row.avg_latency_ms}ms avg</small>
+                </div>
+                <div className="endpoint-bar">
+                  <span style={{ width: `${Math.max(8, (row.requests / maxEndpointRequests) * 100)}%` }} />
+                </div>
+              </div>
+            )) : (
+              <div className="empty-state">
+                <Activity size={22} />
+                <p>No traffic yet. Run the simulator to populate endpoint risk.</p>
+              </div>
+            )}
+          </div>
         </div>
         <div className="grid">
+          <div className="section-title compact">
+            <div>
+              <p className="eyebrow">Latest reports</p>
+              <h2>Debugging queue</h2>
+            </div>
+            <span className="mini-chip">
+              <Zap size={14} /> Auto grouped
+            </span>
+          </div>
           {latest.length ? latest.map((incident) => <IncidentCard key={incident.id} incident={incident} />) : (
-            <div className="card">
+            <div className="card empty-state">
+              <Radar size={24} />
               <h2>No incidents yet</h2>
-              <p className="muted">Run the simulator, then trigger analysis to create AI debugging reports.</p>
+              <p>Run the simulator, then trigger analysis to create debugging reports.</p>
             </div>
           )}
         </div>

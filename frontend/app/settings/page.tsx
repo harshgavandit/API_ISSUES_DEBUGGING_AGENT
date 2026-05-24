@@ -1,4 +1,4 @@
-import { Bell, Brain, Database, SlidersHorizontal } from "lucide-react";
+import { Bell, Brain, Database, Gauge, SlidersHorizontal } from "lucide-react";
 
 export default function SettingsPage() {
   return (
@@ -11,6 +11,13 @@ export default function SettingsPage() {
         </div>
       </div>
       <section className="card">
+        <div className="settings-banner">
+          <Gauge size={20} />
+          <div>
+            <strong>Demo-safe configuration</strong>
+            <p>Runs fully without paid APIs. OpenAI and Slack are optional upgrades, not blockers.</p>
+          </div>
+        </div>
         <div className="settings-row">
           <h3>
             <Database size={18} /> MySQL

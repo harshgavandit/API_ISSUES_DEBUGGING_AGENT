@@ -11,7 +11,7 @@ router = APIRouter(prefix="/incidents", tags=["incidents"])
 
 @router.get("", response_model=list[IncidentOut])
 def list_incidents(db: Session = Depends(get_db)) -> list[Incident]:
-    return list(db.scalars(select(Incident).order_by(desc(Incident.created_at)).limit(100)).all())
+    return list(db.scalars(select(Incident).order_by(desc(Incident.created_at), desc(Incident.id)).limit(100)).all())
 
 
 @router.patch("/{incident_id}/status", response_model=IncidentOut)

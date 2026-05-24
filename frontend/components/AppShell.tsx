@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, Bell, FileText, Gauge, Settings } from "lucide-react";
+import { Activity, Bell, FileText, Gauge, Radar, Settings, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -7,11 +7,13 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-mark">A</div>
+          <div className="brand-mark">
+            <Radar size={19} />
+          </div>
           <div>
             <div>API Copilot</div>
             <div className="muted" style={{ color: "#98a2b3", fontSize: 12 }}>
-              Reliability command center
+              AI debugging command center
             </div>
           </div>
         </div>
@@ -29,12 +31,17 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Settings size={18} /> Settings
           </Link>
         </nav>
-        <div className="card" style={{ background: "#182230", borderColor: "#344054", marginTop: "auto" }}>
-          <Activity size={18} />
-          <p style={{ marginTop: 10, marginBottom: 4, color: "white", fontWeight: 700 }}>Agent loop active</p>
-          <p style={{ margin: 0, color: "#98a2b3", fontSize: 13 }}>
-            Detects anomalies, groups failures, and drafts debugging recommendations.
+        <div className="side-panel">
+          <div className="side-panel-icon">
+            <Sparkles size={18} />
+          </div>
+          <p className="side-panel-title">Agent loop active</p>
+          <p className="side-panel-copy">
+            Watches logs, catches silent failures, and turns noisy API errors into action plans.
           </p>
+          <div className="pulse-row">
+            <Activity size={14} /> Analysis every 60s
+          </div>
         </div>
       </aside>
       <main className="main">{children}</main>

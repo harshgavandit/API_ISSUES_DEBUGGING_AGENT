@@ -10,11 +10,23 @@ from app.models import ApiLog, FailureGroup, Severity
 
 def normalize_error(message: str | None, response: str | None) -> str:
     raw = (message or response or "unknown failure").lower()
+    if "timeout" in raw or "timed out" in raw:
+        return "downstream payment timeout"
+    if "success" in raw and "false" in raw:
+        return "business success flag false"
     raw = re.sub(r"\b[0-9a-f]{8,}\b", "<id>", raw)
     raw = re.sub(r"\b\d+\b", "<num>", raw)
     raw = re.sub(r"https?://\S+", "<url>", raw)
     raw = raw.replace("\n", " ")
     return raw[:500].strip()
+
+
+def status_bucket(status_code: int) -> int:
+    if status_code >= 500:
+        return 500
+    if status_code >= 400:
+        return 400
+    return status_code
 
 
 def severity_for(status_code: int, count: int, latency_ms: float) -> Severity:
@@ -44,7 +56,7 @@ def group_recent_failures(db: Session, minutes: int = 15) -> list[FailureGroup]:
         key = (
             log.service_name,
             log.endpoint,
-            log.status_code,
+            status_bucket(log.status_code),
             normalize_error(log.error_message, log.response_body_sample),
         )
         buckets[key].append(log)
