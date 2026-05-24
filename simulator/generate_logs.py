@@ -66,7 +66,7 @@ def main() -> None:
     parser.add_argument("--sleep", type=float, default=0.0, help="Delay between batches")
     args = parser.parse_args()
 
-    client = httpx.Client(timeout=10)
+    client = httpx.Client(timeout=30)  # Increased from 10s to allow for backend analysis
     batch = []
     for index in range(args.count):
         batch.append(make_log(args.mode, index))

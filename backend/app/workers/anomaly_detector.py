@@ -142,7 +142,11 @@ def create_incidents(db: Session) -> list[Incident]:
         db.add(incident)
         db.commit()
         db.refresh(incident)
-        send_incident_alerts(db, incident)
+        try:
+            send_incident_alerts(db, incident)
+        except Exception:
+            # Silently fail if alerting fails to avoid blocking the analysis
+            pass
         incidents.append(incident)
 
     return incidents

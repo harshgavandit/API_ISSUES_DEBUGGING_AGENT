@@ -39,8 +39,10 @@ def send_slack_alert(db: Session, incident: Incident) -> None:
     }
     status = "sent"
     try:
-        httpx.post(settings.slack_webhook_url, json=payload, timeout=5)
-    except httpx.HTTPError:
+        httpx.post(settings.slack_webhook_url, json=payload, timeout=3)
+    except (httpx.HTTPError, httpx.TimeoutException):
+        status = "failed"
+    except Exception:
         status = "failed"
 
     db.add(Alert(incident_id=incident.id, channel="slack", status=status, payload=payload))
