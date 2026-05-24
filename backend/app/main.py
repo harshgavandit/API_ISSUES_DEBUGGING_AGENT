@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.db import SessionLocal, init_db
-from app.routes import incidents, logs, metrics
+from app.routes import demo, incidents, logs, metrics
 from app.workers.anomaly_detector import run_analysis
 
 scheduler = BackgroundScheduler()
@@ -50,6 +50,7 @@ app.add_middleware(
 app.include_router(logs.router)
 app.include_router(incidents.router)
 app.include_router(metrics.router)
+app.include_router(demo.router)
 
 
 @app.get("/health")

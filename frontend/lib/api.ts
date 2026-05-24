@@ -44,6 +44,13 @@ export type ApiLog = {
   response_body_sample?: string | null;
 };
 
+export type DemoSeedResult = {
+  logs_created: number;
+  anomalies_created: number;
+  failure_groups_created: number;
+  incidents_created: number;
+};
+
 async function getJson<T>(path: string): Promise<T> {
   const response = await fetch(`${getApiBase()}${path}`, { cache: "no-store" });
   if (!response.ok) {
@@ -70,4 +77,12 @@ export async function runAnalysis() {
     throw new Error(`Analysis failed: ${response.status}`);
   }
   return response.json();
+}
+
+export async function seedDemoTraffic() {
+  const response = await fetch(`${getApiBase()}/demo/seed`, { method: "POST" });
+  if (!response.ok) {
+    throw new Error(`Demo seed failed: ${response.status}`);
+  }
+  return response.json() as Promise<DemoSeedResult>;
 }

@@ -1,4 +1,5 @@
 import { AnalyzeButton } from "@/components/AnalyzeButton";
+import { DemoTrafficButton } from "@/components/DemoTrafficButton";
 import { IncidentCard } from "@/components/IncidentCard";
 import { MetricCard } from "@/components/MetricCard";
 import { getIncidents, getSummary, type Incident, type Summary } from "@/lib/api";
@@ -44,6 +45,7 @@ export default async function DashboardPage() {
             developer-ready debugging reports.
           </p>
           <div className="hero-actions">
+            <DemoTrafficButton />
             <AnalyzeButton />
             <span className="status-chip">
               <ShieldCheck size={15} /> Free deterministic mode active

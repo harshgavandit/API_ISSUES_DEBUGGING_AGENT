@@ -242,7 +242,7 @@ h3 {
 
 .hero-actions {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 20px;
@@ -451,7 +451,7 @@ h3 {
 
 .analyze-control {
   display: grid;
-  justify-items: end;
+  justify-items: start;
   gap: 8px;
 }
 
@@ -460,7 +460,7 @@ h3 {
   color: var(--ok);
   font-size: 12px;
   font-weight: 800;
-  text-align: right;
+  text-align: left;
 }
 
 .action-status.error {
