@@ -1,0 +1,60 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: api-copilot-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: api_copilot
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: api-copilot-backend
+    environment:
+      DATABASE_URL: mysql+pymysql://root:password@mysql:3306/api_copilot
+      ENABLE_AI: "false"
+      OPENAI_API_KEY: ""
+      SLACK_WEBHOOK_URL: ""
+      ANALYSIS_INTERVAL_SECONDS: "60"
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE: http://localhost:8000
+    container_name: api-copilot-frontend
+    environment:
+      API_INTERNAL_BASE: http://backend:8000
+      NEXT_PUBLIC_API_BASE: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  simulator:
+    build:
+      context: ./simulator
+    profiles:
+      - demo
+    environment:
+      API_BASE: http://backend:8000
+    depends_on:
+      - backend
+    command: ["python", "generate_logs.py", "--api", "http://backend:8000", "--mode", "incident", "--count", "160"]
+
+volumes:
+  mysql-data:
