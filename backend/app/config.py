@@ -7,6 +7,13 @@ class Settings(BaseSettings):
     slack_webhook_url: str | None = None
     enable_ai: bool = False
     analysis_interval_seconds: int = 60
+    email_alerts_enabled: bool = False
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 587
+    smtp_username: str | None = None
+    smtp_password: str | None = None
+    alert_email_from: str | None = None
+    alert_email_to: str | None = None
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

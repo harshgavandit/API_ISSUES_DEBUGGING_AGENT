@@ -19,12 +19,10 @@ services:
     build:
       context: ./backend
     container_name: api-copilot-backend
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: mysql+pymysql://root:password@mysql:3306/api_copilot
-      ENABLE_AI: "false"
-      OPENAI_API_KEY: ""
-      SLACK_WEBHOOK_URL: ""
-      ANALYSIS_INTERVAL_SECONDS: "60"
     ports:
       - "8000:8000"
     depends_on:

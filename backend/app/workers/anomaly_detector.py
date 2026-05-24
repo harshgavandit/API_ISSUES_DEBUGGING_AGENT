@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.models import Anomaly, ApiLog, Incident, IncidentStatus, Severity
 from app.services.ai_debugger import explain_failure_group
-from app.services.alerting import send_slack_alert
+from app.services.alerting import send_incident_alerts
 from app.services.grouping import group_recent_failures
 
 
@@ -142,7 +142,7 @@ def create_incidents(db: Session) -> list[Incident]:
         db.add(incident)
         db.commit()
         db.refresh(incident)
-        send_slack_alert(db, incident)
+        send_incident_alerts(db, incident)
         incidents.append(incident)
 
     return incidents
