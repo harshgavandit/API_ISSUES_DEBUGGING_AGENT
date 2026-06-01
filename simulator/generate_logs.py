@@ -1,3 +1,5 @@
+"""CLI tool that posts synthetic API logs to the copilot ingest endpoint."""
+
 import argparse
 import random
 import time
