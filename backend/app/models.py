@@ -1,3 +1,5 @@
+"""SQLAlchemy ORM models for logs, anomalies, incidents, and alerts."""
+
 from datetime import datetime
 from enum import Enum
 from sqlalchemy import DateTime, Enum as SqlEnum, Float, ForeignKey, Index, Integer, JSON, String, Text
