@@ -1,3 +1,5 @@
+"""Generate incident explanations with OpenAI or deterministic fallback."""
+
 import json
 
 from openai import OpenAI
