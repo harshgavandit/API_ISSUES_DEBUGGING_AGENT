@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const API_INTERNAL_BASE = process.env.API_INTERNAL_BASE || "http://localhost:8000";
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path: string[] }> }) {
