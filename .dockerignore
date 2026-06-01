@@ -8,3 +8,5 @@
 **/.next
 **/*.db
 .git
+**/*.log
+**/.pytest_cache
