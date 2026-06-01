@@ -1,3 +1,5 @@
+"""Background analysis: anomalies, grouping, incidents, and alerts."""
+
 from datetime import datetime, timedelta
 
 from sqlalchemy import func, select
