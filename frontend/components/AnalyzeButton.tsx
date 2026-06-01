@@ -14,6 +14,7 @@ export function AnalyzeButton() {
   return (
     <div className="analyze-control">
       <button
+        type="button"
         className="btn primary"
         disabled={pending}
         onClick={() =>
