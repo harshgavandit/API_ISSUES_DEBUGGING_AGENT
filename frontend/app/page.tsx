@@ -5,6 +5,8 @@ import { MetricCard } from "@/components/MetricCard";
 import { getIncidents, getSummary, type Incident, type Summary } from "@/lib/api";
 import { Activity, AlertTriangle, CheckCircle2, Clock3, Radar, ShieldCheck, Zap } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   let summary: Summary;
   let incidents: Incident[] = [];
