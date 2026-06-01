@@ -14,6 +14,7 @@ export function DemoTrafficButton() {
   return (
     <div className="analyze-control">
       <button
+        type="button"
         className="btn"
         disabled={pending}
         onClick={() =>
