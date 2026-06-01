@@ -20,6 +20,7 @@ services:
     build:
       context: ./backend
     container_name: api-copilot-backend
+    restart: unless-stopped
     env_file:
       - ./backend/.env
     environment:
