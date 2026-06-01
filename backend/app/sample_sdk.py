@@ -1,3 +1,5 @@
+"""Lightweight client helpers for sending API logs to the copilot ingest endpoint."""
+
 from time import perf_counter
 from typing import Any
 
