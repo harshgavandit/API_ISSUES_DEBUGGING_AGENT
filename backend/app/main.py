@@ -53,6 +53,6 @@ app.include_router(metrics.router)
 app.include_router(demo.router)
 
 
-@app.get("/health")
+@app.get("/health", summary="Liveness check")
 def health() -> dict[str, str]:
-    return {"status": "ok"}
+    return {"status": "ok", "service": "api-reliability-copilot"}
