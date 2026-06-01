@@ -6,7 +6,7 @@ export function IncidentCard({ incident }: { incident: Incident }) {
   const confidence = Math.round(incident.ai_confidence * 100);
 
   return (
-    <article className={`card incident ${incident.severity}`}>
+    <article className={`card incident ${incident.severity}`} aria-label={`Incident: ${incident.title}`}>
       <div className="incident-topline">
         <span className={`badge ${incident.severity}`}>
           <ShieldAlert size={13} /> {incident.severity}
