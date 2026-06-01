@@ -12,7 +12,7 @@ from app.workers.anomaly_detector import p95, run_analysis
 router = APIRouter(prefix="/metrics", tags=["metrics"])
 
 
-@router.get("/summary", response_model=MetricsOut)
+@router.get("/summary", response_model=MetricsOut, summary="Dashboard metrics for the last hour")
 def summary(db: Session = Depends(get_db)) -> MetricsOut:
     since = datetime.utcnow() - timedelta(hours=1)
     logs = db.scalars(select(ApiLog).where(ApiLog.timestamp >= since)).all()
@@ -50,6 +50,6 @@ def summary(db: Session = Depends(get_db)) -> MetricsOut:
     )
 
 
-@router.post("/analyze", response_model=AnalysisResult)
+@router.post("/analyze", response_model=AnalysisResult, summary="Run anomaly detection and incident grouping")
 def analyze(db: Session = Depends(get_db)) -> dict[str, int]:
     return run_analysis(db)
