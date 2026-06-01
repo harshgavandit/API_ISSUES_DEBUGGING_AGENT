@@ -15,7 +15,11 @@ class Settings(BaseSettings):
     alert_email_from: str | None = None
     alert_email_to: str | None = None
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
 
 
 settings = Settings()
