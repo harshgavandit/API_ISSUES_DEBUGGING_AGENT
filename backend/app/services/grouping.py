@@ -1,3 +1,5 @@
+"""Group related API failures into incident candidates."""
+
 import re
 from collections import defaultdict
 from datetime import datetime, timedelta
