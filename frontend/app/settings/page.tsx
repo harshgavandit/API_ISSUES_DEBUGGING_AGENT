@@ -1,5 +1,7 @@
 import { Bell, Brain, Database, Gauge, SlidersHorizontal } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default function SettingsPage() {
   return (
     <>
