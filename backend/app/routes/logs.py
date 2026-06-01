@@ -11,7 +11,7 @@ from app.schemas import LogIngest, LogOut
 router = APIRouter(prefix="/logs", tags=["logs"])
 
 
-@router.post("/ingest", response_model=LogOut)
+@router.post("/ingest", response_model=LogOut, summary="Ingest a single API log event")
 def ingest_log(payload: LogIngest, db: Session = Depends(get_db)) -> ApiLog:
     log = ApiLog(**payload.model_dump(exclude={"timestamp"}), timestamp=payload.timestamp or datetime.utcnow())
     db.add(log)
