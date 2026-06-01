@@ -1,6 +1,8 @@
 import { getLogs, type ApiLog } from "@/lib/api";
 import { FileSearch, Timer, TriangleAlert } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function LogsPage() {
   let logs: ApiLog[] = [];
   try {
