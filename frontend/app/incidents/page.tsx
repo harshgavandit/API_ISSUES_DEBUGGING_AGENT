@@ -3,6 +3,8 @@ import { IncidentCard } from "@/components/IncidentCard";
 import { getIncidents, type Incident } from "@/lib/api";
 import { BrainCircuit, CheckCircle2, ListChecks, Radar } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function IncidentsPage() {
   let incidents: Incident[] = [];
   try {
