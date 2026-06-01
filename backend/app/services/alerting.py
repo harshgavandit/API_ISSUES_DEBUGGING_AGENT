@@ -1,3 +1,5 @@
+"""Deliver incident alerts via Slack and optional email."""
+
 import smtplib
 from email.message import EmailMessage
 
