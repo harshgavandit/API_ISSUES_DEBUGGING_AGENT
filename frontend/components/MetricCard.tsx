@@ -12,7 +12,7 @@ export function MetricCard({
   tone?: "neutral" | "good" | "warn" | "danger" | "info";
 }) {
   return (
-    <div className={`card metric-card ${tone}`}>
+    <div className={`card metric-card ${tone}`} role="group" aria-label={label}>
       <div className="metric-label">
         <span>{label}</span>
         <span className="metric-dot" />
