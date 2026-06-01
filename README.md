@@ -201,4 +201,5 @@ Use this script when presenting:
 - Automation: background analysis loop plus alert hooks.
 - Product thinking: detects silent failures, not just obvious server errors.
 
-*Last updated: June 2026.*
+*Last updated: June 2026 — maintenance pass on docs and configs.*
+
