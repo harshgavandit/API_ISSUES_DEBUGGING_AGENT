@@ -1,3 +1,5 @@
+"""Synthetic API log payloads for demos and local testing."""
+
 import random
 import uuid
 from datetime import datetime, timedelta
