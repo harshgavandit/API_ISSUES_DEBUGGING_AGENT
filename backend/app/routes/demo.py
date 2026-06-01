@@ -9,7 +9,7 @@ from app.workers.anomaly_detector import run_analysis
 router = APIRouter(prefix="/demo", tags=["demo"])
 
 
-@router.post("/seed")
+@router.post("/seed", summary="Seed demo logs and run analysis")
 def seed_demo_data(
     db: Session = Depends(get_db),
     count: int = Query(default=160, ge=50, le=500),
