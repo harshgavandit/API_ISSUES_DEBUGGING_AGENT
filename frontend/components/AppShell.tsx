@@ -17,7 +17,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
           </div>
         </div>
-        <nav className="nav">
+        <nav className="nav" aria-label="Main navigation">
           <Link href="/">
             <Gauge size={18} /> Overview
           </Link>
