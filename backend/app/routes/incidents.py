@@ -9,7 +9,7 @@ from app.schemas import IncidentOut
 router = APIRouter(prefix="/incidents", tags=["incidents"])
 
 
-@router.get("", response_model=list[IncidentOut])
+@router.get("", response_model=list[IncidentOut], summary="List recent incidents")
 def list_incidents(db: Session = Depends(get_db)) -> list[Incident]:
     return list(db.scalars(select(Incident).order_by(desc(Incident.created_at), desc(Incident.id)).limit(100)).all())
 
