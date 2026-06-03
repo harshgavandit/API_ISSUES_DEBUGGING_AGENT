@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class LogIngest(BaseModel):
@@ -25,14 +25,15 @@ class LogIngest(BaseModel):
 
 
 class LogOut(LogIngest):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     timestamp: datetime
 
-    class Config:
-        from_attributes = True
-
 
 class IncidentOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     created_at: datetime
     title: str
@@ -44,9 +45,6 @@ class IncidentOut(BaseModel):
     affected_users_count: int
     ai_confidence: float
     status: str
-
-    class Config:
-        from_attributes = True
 
 
 class MetricsOut(BaseModel):
