@@ -20,7 +20,7 @@ def ingest_log(payload: LogIngest, db: Session = Depends(get_db)) -> ApiLog:
     return log
 
 
-@router.post("/bulk", response_model=list[LogOut])
+@router.post("/bulk", response_model=list[LogOut], summary="Ingest multiple API log events")
 def ingest_bulk(payloads: list[LogIngest], db: Session = Depends(get_db)) -> list[ApiLog]:
     logs = [
         ApiLog(**payload.model_dump(exclude={"timestamp"}), timestamp=payload.timestamp or datetime.utcnow())
@@ -33,7 +33,7 @@ def ingest_bulk(payloads: list[LogIngest], db: Session = Depends(get_db)) -> lis
     return logs
 
 
-@router.get("", response_model=list[LogOut])
+@router.get("", response_model=list[LogOut], summary="List recent API logs with optional filters")
 def list_logs(
     db: Session = Depends(get_db),
     endpoint: str | None = None,
