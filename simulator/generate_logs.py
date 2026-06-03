@@ -68,24 +68,24 @@ def main() -> None:
     parser.add_argument("--sleep", type=float, default=0.0, help="Delay between batches")
     args = parser.parse_args()
 
-    client = httpx.Client(timeout=30)  # Increased from 10s to allow for backend analysis
-    batch = []
-    for index in range(args.count):
-        batch.append(make_log(args.mode, index))
-        if len(batch) == 25:
+    with httpx.Client(timeout=30) as client:
+        batch = []
+        for index in range(args.count):
+            batch.append(make_log(args.mode, index))
+            if len(batch) == 25:
+                client.post(f"{args.api}/logs/bulk", json=batch).raise_for_status()
+                print(f"sent {index + 1}/{args.count}")
+                batch = []
+                if args.sleep:
+                    time.sleep(args.sleep)
+
+        if batch:
             client.post(f"{args.api}/logs/bulk", json=batch).raise_for_status()
-            print(f"sent {index + 1}/{args.count}")
-            batch = []
-            if args.sleep:
-                time.sleep(args.sleep)
+            print(f"sent {args.count}/{args.count}")
 
-    if batch:
-        client.post(f"{args.api}/logs/bulk", json=batch).raise_for_status()
-        print(f"sent {args.count}/{args.count}")
-
-    analysis = client.post(f"{args.api}/metrics/analyze")
-    analysis.raise_for_status()
-    print("analysis:", analysis.json())
+        analysis = client.post(f"{args.api}/metrics/analyze")
+        analysis.raise_for_status()
+        print("analysis:", analysis.json())
 
 
 if __name__ == "__main__":
