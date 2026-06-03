@@ -17,6 +17,7 @@ export function DemoTrafficButton() {
         type="button"
         className="btn"
         disabled={pending}
+        aria-busy={pending}
         onClick={() =>
           startTransition(async () => {
             setMessage(null);
