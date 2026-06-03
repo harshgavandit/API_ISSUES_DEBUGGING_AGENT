@@ -37,7 +37,12 @@ async def lifespan(_: FastAPI):
         scheduler.shutdown()
 
 
-app = FastAPI(title="API Reliability Copilot", version="0.1.2", lifespan=lifespan)
+app = FastAPI(
+    title="API Reliability Copilot",
+    version="0.1.2",
+    description="Ingest API logs, detect anomalies, and generate incident reports.",
+    lifespan=lifespan,
+)
 
 app.add_middleware(
     CORSMiddleware,
