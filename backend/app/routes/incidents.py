@@ -14,7 +14,7 @@ def list_incidents(db: Session = Depends(get_db)) -> list[Incident]:
     return list(db.scalars(select(Incident).order_by(desc(Incident.created_at), desc(Incident.id)).limit(100)).all())
 
 
-@router.patch("/{incident_id}/status", response_model=IncidentOut)
+@router.patch("/{incident_id}/status", response_model=IncidentOut, summary="Update incident workflow status")
 def update_status(incident_id: int, status: IncidentStatus, db: Session = Depends(get_db)) -> Incident:
     incident = db.get(Incident, incident_id)
     if not incident:
