@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
@@ -13,7 +15,7 @@ router = APIRouter(prefix="/demo", tags=["demo"])
 def seed_demo_data(
     db: Session = Depends(get_db),
     count: int = Query(default=160, ge=50, le=500),
-) -> dict[str, int]:
+) -> dict[str, Any]:
     logs = [ApiLog(**make_demo_log(index)) for index in range(count)]
     db.add_all(logs)
     db.commit()
