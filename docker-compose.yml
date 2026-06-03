@@ -49,6 +49,7 @@ services:
   simulator:
     build:
       context: ./simulator
+    restart: on-failure
     profiles:
       - demo
     environment:
