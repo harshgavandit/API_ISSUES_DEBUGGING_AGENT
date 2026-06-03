@@ -1,5 +1,7 @@
 # API Reliability Copilot
 
+> Hackathon-ready API reliability agent with FastAPI, Next.js, and MySQL.
+
 An AI-assisted API monitoring and debugging agent for detecting silent failures, latency spikes, recurring integration errors, and developer-actionable incidents before users complain.
 
 ## What It Does
