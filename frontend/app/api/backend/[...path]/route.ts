@@ -13,6 +13,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
     method: request.method,
     headers: {
       "content-type": request.headers.get("content-type") || "application/json",
+      accept: request.headers.get("accept") || "application/json",
     },
     body: ["GET", "HEAD"].includes(request.method) ? undefined : await request.text(),
     cache: "no-store",
