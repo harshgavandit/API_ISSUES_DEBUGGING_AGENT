@@ -1,3 +1,4 @@
+# API Reliability Copilot — frontend image
 FROM node:22-alpine
 
 WORKDIR /app
