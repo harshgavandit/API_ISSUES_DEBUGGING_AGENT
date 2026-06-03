@@ -38,7 +38,8 @@ class ApiCopilotClient:
             "response_body_sample": response_body_sample,
             "meta": meta,
         }
-        httpx.post(f"{self.ingest_url}/logs/ingest", json=payload, timeout=2)
+        response = httpx.post(f"{self.ingest_url}/logs/ingest", json=payload, timeout=2)
+        response.raise_for_status()
 
 
 class track_api_call:
