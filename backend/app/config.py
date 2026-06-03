@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -6,7 +7,7 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     slack_webhook_url: str | None = None
     enable_ai: bool = False
-    analysis_interval_seconds: int = 60
+    analysis_interval_seconds: int = Field(default=60, ge=15, le=3600)
     email_alerts_enabled: bool = False
     smtp_host: str = "smtp.gmail.com"
     smtp_port: int = 587
