@@ -1,3 +1,5 @@
+export const DEFAULT_LOG_LIMIT = 150;
+
 /** Resolve backend base URL for server vs browser requests. */
 function getApiBase() {
   if (typeof window === "undefined") {
@@ -69,7 +71,7 @@ export function getIncidents() {
 }
 
 export function getLogs() {
-  return getJson<ApiLog[]>("/logs?limit=150");
+  return getJson<ApiLog[]>(`/logs?limit=${DEFAULT_LOG_LIMIT}`);
 }
 
 export async function runAnalysis() {
