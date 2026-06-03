@@ -51,5 +51,5 @@ def summary(db: Session = Depends(get_db)) -> MetricsOut:
 
 
 @router.post("/analyze", response_model=AnalysisResult, summary="Run anomaly detection and incident grouping")
-def analyze(db: Session = Depends(get_db)) -> dict[str, int]:
-    return run_analysis(db)
+def analyze(db: Session = Depends(get_db)) -> AnalysisResult:
+    return AnalysisResult(**run_analysis(db))
