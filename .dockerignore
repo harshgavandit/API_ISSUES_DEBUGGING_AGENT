@@ -10,3 +10,5 @@
 .git
 **/*.log
 **/.pytest_cache
+**/.coverage
+**/htmlcov
