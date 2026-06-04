@@ -44,7 +44,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </aside>
-      <main className="main">{children}</main>
+      <main id="main-content" className="main" aria-label="Page content">
+        {children}
+      </main>
     </div>
   );
 }
