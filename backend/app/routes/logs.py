@@ -39,7 +39,7 @@ def list_logs(
     endpoint: str | None = None,
     service_name: str | None = None,
     status_min: int | None = None,
-    limit: int = Query(default=100, le=500),
+    limit: int = Query(default=100, ge=1, le=500),
 ) -> list[ApiLog]:
     stmt = select(ApiLog).order_by(desc(ApiLog.timestamp)).limit(limit)
     if endpoint:
