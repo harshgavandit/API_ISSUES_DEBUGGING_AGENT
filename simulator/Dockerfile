@@ -1,3 +1,4 @@
+# API Reliability Copilot — log simulator image
 FROM python:3.12-slim
 
 WORKDIR /app
