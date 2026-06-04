@@ -17,6 +17,7 @@ export function AnalyzeButton() {
         type="button"
         className="btn primary"
         disabled={pending}
+        aria-busy={pending}
         onClick={() =>
           startTransition(async () => {
             setMessage(null);
