@@ -46,6 +46,7 @@ export default async function IncidentsPage() {
             <CheckCircle2 size={26} />
             <h2>No incidents detected</h2>
             <p>Generate demo logs from the simulator to see incident grouping in action.</p>
+            <p className="muted">You can also trigger analysis from the dashboard to create a fresh incident report.</p>
           </div>
         ) : null}
       </section>
