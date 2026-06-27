@@ -28,13 +28,13 @@ This project is designed to be easy to demo, easy to extend, and quick to run lo
 
 ## Option 1: Docker Startup
 
-Use this on the laptop if Docker is installed and available.
+Use this on the laptop if Docker is installed and ready.
 
 ```powershell
 docker compose up --build
 ```
 
-Open the frontend at:
+Open the frontend UI at:
 
 ```text
 http://localhost:3000
@@ -123,7 +123,7 @@ Copy-Item .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-The backend creates its tables automatically at startup.
+The backend creates its database tables automatically at startup.
 
 ### Run Frontend
 
@@ -207,5 +207,5 @@ Use this script when presenting:
 - Automation: background analysis loop plus alert hooks.
 - Product thinking: detects silent failures, not just obvious server errors.
 
-*Last updated: June 2026 — maintenance pass on docs, configs, and local setup notes for demos.*
+*Last updated: June 2026 — maintenance pass on docs, configs, and local setup notes for demos and walkthroughs.*
 
