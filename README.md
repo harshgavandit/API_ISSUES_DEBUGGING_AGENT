@@ -4,6 +4,8 @@
 
 An AI-assisted API monitoring and debugging agent for detecting silent failures, latency spikes, recurring integration errors, and developer-actionable incidents before users complain.
 
+This project is designed to be easy to demo, easy to extend, and quick to run locally.
+
 ## What It Does
 
 - Ingests API logs through FastAPI endpoints.
@@ -12,7 +14,7 @@ An AI-assisted API monitoring and debugging agent for detecting silent failures,
 - Groups related failures into incident candidates.
 - Generates debugging reports using either OpenAI or a deterministic fallback.
 - Shows a Next.js command center for metrics, incidents, logs, and configuration.
-- Includes a simulator that creates a realistic checkout/payment failure demo.
+- Includes a simulator that creates a realistic checkout and payment failure demo.
 
 ## Stack
 
@@ -203,5 +205,5 @@ Use this script when presenting:
 - Automation: background analysis loop plus alert hooks.
 - Product thinking: detects silent failures, not just obvious server errors.
 
-*Last updated: June 2026 — maintenance pass on docs and configs.*
+*Last updated: June 2026 — maintenance pass on docs, configs, and local setup notes.*
 
