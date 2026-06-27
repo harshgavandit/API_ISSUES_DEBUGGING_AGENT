@@ -32,7 +32,7 @@ Use this on the laptop if Docker is installed.
 docker compose up --build
 ```
 
-Open:
+Open the frontend at:
 
 ```text
 http://localhost:3000
