@@ -134,7 +134,7 @@ Copy-Item .env.local.example .env.local
 npm run dev
 ```
 
-Open the user interface in your browser at:
+Open the user interface in your browser at the following address:
 
 ```text
 http://localhost:3000
