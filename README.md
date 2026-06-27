@@ -123,7 +123,7 @@ Copy-Item .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-The backend creates its database tables automatically when it starts.
+The backend creates its database tables automatically when it starts up.
 
 ### Run Frontend
 
