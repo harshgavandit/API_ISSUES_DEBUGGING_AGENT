@@ -40,11 +40,13 @@ def summary(db: Session = Depends(get_db)) -> MetricsOut:
         for endpoint, count, avg in endpoint_rows
     ]
 
+    latency_values = [log.latency_ms for log in logs if isinstance(log.latency_ms, (int, float)) and log.latency_ms >= 0]
+
     return MetricsOut(
         total_requests=total,
         error_rate=round(errors / total, 4) if total else 0,
         silent_failures=silent,
-        p95_latency_ms=round(p95([log.latency_ms for log in logs]), 1),
+        p95_latency_ms=round(p95(latency_values), 1) if latency_values else 0,
         active_incidents=active_incidents,
         risky_endpoints=risky,
     )
