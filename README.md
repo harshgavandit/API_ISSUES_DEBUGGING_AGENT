@@ -6,13 +6,13 @@ An AI-assisted API monitoring and debugging agent for detecting silent failures,
 
 It is intended to be practical for demos, local testing, and fast iteration.
 
-This project is designed to be easy to demo, easy to extend, and quick to run locally for experiments.
+This project is designed to be easy to demo, easy to extend, and quick to run locally for experiments and prototypes.
 
 ## What It Does
 
 - Ingests API logs through FastAPI endpoints for monitoring and investigation tasks.
 - Stores logs, anomalies, grouped failures, incidents, and alerts in MySQL for traceability and review purposes.
-- Detects error-rate spikes, latency spikes, recurring failures, and HTTP 200 silent failures quickly and clearly.
+- Detects error-rate spikes, latency spikes, recurring failures, and HTTP 200 silent failures quickly and clearly for teams.
 - Groups related failures into incident candidates.
 - Generates debugging reports using either OpenAI or a deterministic fallback.
 - Shows a Next.js command center for metrics, incidents, logs, and configuration.
@@ -52,7 +52,7 @@ Generate demo logs through Docker:
 docker compose --profile demo run --rm simulator
 ```
 
-Then refresh the dashboard or click the Run analysis button.
+Then refresh the dashboard or click the Run analysis button to inspect the results.
 
 Stop everything:
 
