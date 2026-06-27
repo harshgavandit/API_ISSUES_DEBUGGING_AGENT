@@ -4,17 +4,19 @@
 
 An AI-assisted API monitoring and debugging agent for detecting silent failures, latency spikes, recurring integration errors, and developer-actionable incidents before users complain.
 
+It is intended to be practical for demos, local testing, and fast iteration.
+
 This project is designed to be easy to demo, easy to extend, and quick to run locally.
 
 ## What It Does
 
-- Ingests API logs through FastAPI endpoints.
-- Stores logs, anomalies, grouped failures, incidents, and alerts in MySQL.
-- Detects error-rate spikes, latency spikes, recurring failures, and HTTP 200 silent failures.
+- Ingests API logs through FastAPI endpoints for monitoring and investigation.
+- Stores logs, anomalies, grouped failures, incidents, and alerts in MySQL for traceability.
+- Detects error-rate spikes, latency spikes, recurring failures, and HTTP 200 silent failures efficiently.
 - Groups related failures into incident candidates.
 - Generates debugging reports using either OpenAI or a deterministic fallback.
 - Shows a Next.js command center for metrics, incidents, logs, and configuration.
-- Includes a simulator that creates a realistic checkout and payment failure demo.
+- Includes a simulator that creates a realistic checkout and payment failure demo flow.
 
 ## Stack
 
@@ -26,7 +28,7 @@ This project is designed to be easy to demo, easy to extend, and quick to run lo
 
 ## Option 1: Docker Startup
 
-Use this on the laptop if Docker is installed.
+Use this on the laptop if Docker is installed and available.
 
 ```powershell
 docker compose up --build
@@ -121,7 +123,7 @@ Copy-Item .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-The backend creates tables automatically at startup.
+The backend creates its tables automatically at startup.
 
 ### Run Frontend
 
@@ -132,7 +134,7 @@ Copy-Item .env.local.example .env.local
 npm run dev
 ```
 
-Open:
+Open the UI at:
 
 ```text
 http://localhost:3000
@@ -205,5 +207,5 @@ Use this script when presenting:
 - Automation: background analysis loop plus alert hooks.
 - Product thinking: detects silent failures, not just obvious server errors.
 
-*Last updated: June 2026 — maintenance pass on docs, configs, and local setup notes.*
+*Last updated: June 2026 — maintenance pass on docs, configs, and local setup notes for demos.*
 
