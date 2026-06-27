@@ -61,3 +61,8 @@ app.include_router(demo.router)
 @app.get("/health", summary="Liveness check")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "api-reliability-copilot", "version": "0.1.2"}
+
+
+@app.get("/health/ready", summary="Readiness check")
+def readiness() -> dict[str, str]:
+    return {"status": "ready", "service": "api-reliability-copilot", "version": "0.1.2"}
