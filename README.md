@@ -6,7 +6,7 @@ An AI-assisted API monitoring and debugging agent for detecting silent failures,
 
 It is intended to be practical for demos, local testing, and fast iteration.
 
-This project is designed to be easy to demo, easy to extend, and quick to run locally.
+This project is designed to be easy to demo, easy to extend, and quick to run locally for experiments.
 
 ## What It Does
 
@@ -52,7 +52,7 @@ Generate demo logs through Docker:
 docker compose --profile demo run --rm simulator
 ```
 
-Then refresh the dashboard or click `Run analysis`.
+Then refresh the dashboard or click the Run analysis button.
 
 Stop everything:
 
@@ -134,7 +134,7 @@ Copy-Item .env.local.example .env.local
 npm run dev
 ```
 
-Open the UI at:
+Open the user interface at:
 
 ```text
 http://localhost:3000
