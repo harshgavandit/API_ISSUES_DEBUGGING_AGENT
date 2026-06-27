@@ -10,8 +10,8 @@ This project is designed to be easy to demo, easy to extend, and quick to run lo
 
 ## What It Does
 
-- Ingests API logs through FastAPI endpoints for monitoring and investigation tasks.
-- Stores logs, anomalies, grouped failures, incidents, and alerts in MySQL for traceability and review purposes.
+- Ingests API logs through FastAPI endpoints for monitoring and investigation tasks during demos.
+- Stores logs, anomalies, grouped failures, incidents, and alerts in MySQL for traceability and review purposes during demos.
 - Detects error-rate spikes, latency spikes, recurring failures, and HTTP 200 silent failures quickly and clearly for teams.
 - Groups related failures into incident candidates.
 - Generates debugging reports using either OpenAI or a deterministic fallback.
