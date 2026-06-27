@@ -28,7 +28,7 @@ This project is designed to be easy to demo, easy to extend, and quick to run lo
 
 ## Option 1: Docker Startup
 
-Use this on the laptop if Docker is installed and ready.
+Use this on the laptop if Docker is installed and ready to use.
 
 ```powershell
 docker compose up --build
@@ -123,7 +123,7 @@ Copy-Item .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-The backend creates its database tables automatically at startup.
+The backend creates its database tables automatically when it starts.
 
 ### Run Frontend
 
@@ -134,7 +134,7 @@ Copy-Item .env.local.example .env.local
 npm run dev
 ```
 
-Open the user interface at:
+Open the user interface in your browser at:
 
 ```text
 http://localhost:3000
